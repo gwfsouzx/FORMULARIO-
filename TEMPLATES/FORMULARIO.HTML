@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cadastro de Usuário</h1>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form id="formCadastro" method="POST">
+            <label>Nome de usuário:</label>
+            <input type="text" id="username" name="username">
+
+            <label>Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label>Senha:</label>
+            <input type="password" id="password" name="password">
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <h2>Usuários cadastrados:</h2>
+        <ul>
+            {% for u in usuarios %}
+                <li>{{ u.username }} - {{ u.email }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
